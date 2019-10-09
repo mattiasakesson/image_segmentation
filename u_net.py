@@ -15,7 +15,7 @@ class Unet_model():
     We use keras to define CNN and DNN layers to the model
     """
 
-    def __init__(self, input_shape=(500,500,1), output_shape=15, con_len=3, con_layers=[25, 50],
+    def __init__(self, input_shape=(500,500,1), output_shape=15, con_len=3, con_layers=[25, 50, 100, 200],
                  last_pooling=keras.layers.AvgPool1D, dense_layers=[100, 100], dataname='noname'):
         self.name = 'unet_con_len' + str(con_len) + '_con_layers' + str(con_layers) + '_dense_layers' + str(
             dense_layers) + '_data' + dataname
