@@ -5,7 +5,7 @@ Created on Wed Jun  5 12:11:49 2019
 @author: ma10s
 """
 from tensorflow import keras
-from tensorflow.keras import backend as K
+import tensorflow.keras.backend as K
 
 import matplotlib.pyplot as plt
 
