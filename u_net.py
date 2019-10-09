@@ -5,6 +5,7 @@ Created on Wed Jun  5 12:11:49 2019
 @author: ma10s
 """
 from tensorflow import keras
+from keras import backend as K
 
 import matplotlib.pyplot as plt
 
@@ -37,8 +38,9 @@ class Unet_model():
                                                        monitor='accuracy',
                                                        mode='min')
         # Using Adam optimizer
-        
-        self.model.compile(optimizer=keras.optimizers.Adam(learning_rate), loss='binary_crossentropy', metrics=['accuracy'])
+        # loss = 'binary_crossentropy'
+
+        self.model.compile(optimizer=keras.optimizers.Adam(learning_rate), loss=dice_coef_loss, metrics=['accuracy'])
 
         if validation_inputs is not None:
             history = self.model.fit(
@@ -77,6 +79,16 @@ class Unet_model():
         print("self.name: ", self.name, ", self.save_as: ", self.save_as)
         self.model = keras.models.load_model(save_as + '.hdf5')
 
+
+
+def dice_coef(y_true, y_pred, smooth=1):
+    y_true_f = K.flatten(y_true)
+    y_pred_f = K.flatten(y_pred)
+    intersection = K.sum(y_true_f * y_pred_f)
+    return (2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
+
+def dice_coef_loss(y_true, y_pred):
+    return -dice_coef(y_true, y_pred)
 
 def construct_model(input_shape, output_shape, con_len=3, con_layers=[25, 50, 100], last_pooling=keras.layers.AvgPool2D,
                     dense_layers=[100, 100]):
