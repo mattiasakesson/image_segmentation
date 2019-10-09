@@ -17,17 +17,21 @@ for f in os.listdir(path):
         f2 = f.split("_")
         # print("f2: ", f2)
         if f2[-1] == 'mask.tif':
-            mask_ = Image.open(os.path.join(path, f))
-            # mask.append(mask_)
+            mask_ = np.asarray(Image.open(os.path.join(path, f)))
+            mask.append(mask_)
             im_name = f2[0] + "_" + f2[1] + ".tif"
-            im_ = Image.open(os.path.join(path, im_name))
-            # im.append(im_)
+            im_ = np.asarray(Image.open(os.path.join(path, im_name)))
+            im.append(im_)
 
 
     i+=1
 
-im = np.array([np.asarray(image)for image in im])
-mask = np.array(np.array([np.asarray(image)for image in mask],dtype=np.bool_),dtype=np.int32)
+# im = np.array([np.asarray(image)for image in im])
+# mask = np.array(np.array([np.asarray(image)for image in mask],dtype=np.bool_),dtype=np.int32)
+
+im = np.array(im)
+mask = np.array(np.array(mask, dtype=np.bool_), dtype=np.int32)
+
 
 print("im shape: ", im.shape)
 print("mask shape: ", mask.shape)
