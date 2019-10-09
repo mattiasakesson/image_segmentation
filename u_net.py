@@ -10,6 +10,15 @@ from keras import backend as K
 import matplotlib.pyplot as plt
 
 
+def dice_coef(y_true, y_pred, smooth=1):
+    y_true_f = K.flatten(y_true)
+    y_pred_f = K.flatten(y_pred)
+    intersection = K.sum(y_true_f * y_pred_f)
+    return (2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
+
+def dice_coef_loss(y_true, y_pred):
+    return -dice_coef(y_true, y_pred)
+
 # Class definition
 class Unet_model():
     """
@@ -81,14 +90,7 @@ class Unet_model():
 
 
 
-def dice_coef(y_true, y_pred, smooth=1):
-    y_true_f = K.flatten(y_true)
-    y_pred_f = K.flatten(y_pred)
-    intersection = K.sum(y_true_f * y_pred_f)
-    return (2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
 
-def dice_coef_loss(y_true, y_pred):
-    return -dice_coef(y_true, y_pred)
 
 def construct_model(input_shape, output_shape, con_len=3, con_layers=[25, 50, 100], last_pooling=keras.layers.AvgPool2D,
                     dense_layers=[100, 100]):
