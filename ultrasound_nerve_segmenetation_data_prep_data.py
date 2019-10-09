@@ -5,7 +5,7 @@ from PIL import Image
 import os
 from matplotlib import pylab as plt
 
-path = "C:/Users/ma10s/Documents/project/ultrasound-nerve-segmentation/train"
+path = "ultrasound-nerve-segmentation/train"
 
 im = []
 im_names = []
