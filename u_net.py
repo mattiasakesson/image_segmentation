@@ -115,7 +115,16 @@ def construct_model(input_shape, output_shape, con_len=3, con_layers=[25, 50, 10
         conv_ = keras.layers.Conv2D(con_layers[level], 2, activation='relu', padding='same', kernel_initializer='he_normal')(
             keras.layers.UpSampling2D(size=(2, 2))(conv_))
 
-        print("conv_ shape: ", conv_.input_shape, " - ", conv_.output_shape)
+        print("conv_ shape: ", conv_.shape)
+        print("conv[level] shape: ", conv[level].shape)
+        output_padding = None
+        if conv_.shape[1:3] != conv[level].shape[2:4]:
+            x_padding = conv[level].shape[1] - conv_.shape[1]
+            y_padding = conv[level].shape[2] - conv_.shape[2]
+            print("paddings: ", x_padding, y_padding)
+            conv_ = keras.layers.ZeroPadding2D(((0,x_padding),(0,y_padding)))(conv_)
+            print("conv_ shape: ", conv_.shape)
+            print("conv[level] shape: ", conv[level].shape)
         conv_ = keras.layers.concatenate([conv[level], conv_], axis=3)
         conv_ = keras.layers.Conv2D(con_layers[level], con_len, activation='relu', padding='same', kernel_initializer='he_normal')(conv_)
         conv_ = keras.layers.Conv2D(con_layers[level], con_len, activation='relu', padding='same', kernel_initializer='he_normal')(conv_)
