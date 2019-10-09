@@ -110,7 +110,7 @@ def construct_model(input_shape, output_shape, con_len=3, con_layers=[25, 50, 10
         conv_ = keras.layers.Conv2D(con_layers[level], con_len, activation='relu', padding='same', kernel_initializer='he_normal')(conv_)
         conv_ = keras.layers.Conv2D(con_layers[level], con_len, activation='relu', padding='same', kernel_initializer='he_normal')(conv_)
 
-    model = keras.models.Model(inputs=inputs, output=conv_)
+    model = keras.models.Model(inputs=inputs, outputs=conv_)
 
     model.summary()
     return model
