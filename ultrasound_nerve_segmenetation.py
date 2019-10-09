@@ -13,7 +13,7 @@ mask = []
 mask_names = []
 i = 0
 for f in os.listdir(path):
-    if i<100:
+    if i<1000000:
         f2 = f.split("_")
         # print("f2: ", f2)
         if f2[-1] == 'mask.tif':
