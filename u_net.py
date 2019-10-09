@@ -4,8 +4,9 @@ Created on Wed Jun  5 12:11:49 2019
 
 @author: ma10s
 """
+from keras import *
 from tensorflow import keras
-from tensorflow import keras.backend as K
+
 
 import matplotlib.pyplot as plt
 
