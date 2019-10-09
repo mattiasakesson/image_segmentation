@@ -13,7 +13,7 @@ print("input image shape: ", input_image.shape)
 print("mask shape: ", mask.shape)
 
 
-model = Unet_model(input_shape=(420,580,1), con_layers=[25, 50, 100])
+model = Unet_model(input_shape=(420,580,1), con_layers=[4,8,16])
 
 model.train(input_image,mask,verbose=1,batch_size=8)
 

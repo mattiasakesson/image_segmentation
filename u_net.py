@@ -34,11 +34,11 @@ class Unet_model():
         if save_model:
             mcp_save = keras.callbacks.ModelCheckpoint(self.save_as + '.hdf5',
                                                        save_best_only=True,
-                                                       monitor='val_loss',
+                                                       monitor='accuracy',
                                                        mode='min')
         # Using Adam optimizer
-        self.model.compile(optimizer=keras.optimizers.Adam(learning_rate),
-                           loss='mean_squared_error', metrics=['mae'])
+        
+        self.model.compile(optimizer=keras.optimizers.Adam(learning_rate), loss='binary_crossentropy', metrics=['accuracy'])
 
         if validation_inputs is not None:
             history = self.model.fit(
