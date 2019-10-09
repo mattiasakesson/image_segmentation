@@ -15,5 +15,5 @@ print("mask shape: ", mask.shape)
 
 model = Unet_model(input_shape=(420,580,1), con_layers=[25, 50, 100])
 
-model.fit(input_image,)
+model.train(input_image,mask)
 

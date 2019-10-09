@@ -25,7 +25,7 @@ class Unet_model():
         self.save_as = 'saved_models/' + self.name
 
     # train the model given the data
-    def train(self, inputs, targets, validation_inputs, validation_targets, batch_size, epochs, learning_rate=0.001,
+    def train(self, inputs, targets, validation_inputs=None, validation_targets=None, batch_size=32, epochs=20, learning_rate=0.001,
               save_model=True, val_freq=1, early_stopping_patience=5, plot_training_progress=False, verbose=1):
 
         es = keras.callbacks.EarlyStopping(monitor='val_mean_absolute_error', mode='min', verbose=verbose,
@@ -39,10 +39,18 @@ class Unet_model():
         # Using Adam optimizer
         self.model.compile(optimizer=keras.optimizers.Adam(learning_rate),
                            loss='mean_squared_error', metrics=['mae'])
-        history = self.model.fit(
-            inputs, targets, validation_data=(validation_inputs,
-                                              validation_targets), epochs=epochs, batch_size=batch_size, shuffle=True,
-            callbacks=[mcp_save, es], validation_freq=val_freq, verbose=2)
+
+        if validation_inputs is not None:
+            history = self.model.fit(
+                inputs, targets, validation_data=(validation_inputs,
+                                                  validation_targets), epochs=epochs, batch_size=batch_size, shuffle=True,
+                callbacks=[mcp_save, es], validation_freq=val_freq, verbose=verbose)
+        else:
+            history = self.model.fit(
+                inputs, targets, epochs=epochs, batch_size=batch_size,
+                shuffle=True,
+                callbacks=[mcp_save, es], validation_freq=val_freq, verbose=verbose)
+
 
         # To avoid overfitting load the model with best validation results after
         # the first training part.
