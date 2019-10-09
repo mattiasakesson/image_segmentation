@@ -23,7 +23,7 @@ for f in os.listdir(path):
 
 
 im = np.array(im)
-mask = np.array(np.array(mask, dtype=np.bool_), dtype=np.int32)
+mask = np.array(np.array(mask, dtype=np.bool_), dtype=np.int16)
 
 
 print("im shape: ", im.shape)
