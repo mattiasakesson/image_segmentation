@@ -4,7 +4,7 @@ Created on Wed Jun  5 12:11:49 2019
 
 @author: ma10s
 """
-from keras import *
+from keras import backend as K
 from tensorflow import keras
 
 
