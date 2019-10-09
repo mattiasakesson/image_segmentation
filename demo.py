@@ -6,10 +6,10 @@ import numpy as np
 input_image = pickle.load(open('ultrasound_nerve_segmentation_data/input_image.p', "rb"))
 mask = pickle.load(open('ultrasound_nerve_segmentation_data/mask.p', "rb"))
 
-imput_image = np.expand_dims(input_image,3)
+input_image = np.expand_dims(input_image,3)
 mask = np.expand_dims(mask,3)
 
-print("imput image shape: ", imput_image.shape)
+print("input image shape: ", input_image.shape)
 print("mask shape: ", mask.shape)
 
 
