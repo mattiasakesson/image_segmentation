@@ -114,7 +114,7 @@ def construct_model(input_shape, output_shape, con_len=3, con_layers=[25, 50, 10
     for level in range(levels-1,-1,-1):
         # conv_ = keras.layers.Conv2D(con_layers[level], 2, activation='relu', padding='same', kernel_initializer='he_normal')(
         #     keras.layers.UpSampling2D(size=(2, 2))(conv_))
-        conv_ = keras.layers.Conv2DTranspose(con_layers[level], 2, activation='relu', padding='same')
+        conv_ = keras.layers.Conv2DTranspose(con_layers[level], 2, activation='relu', padding='same')(conv_)
 
 
         print("conv_ shape: ", conv_.shape)
