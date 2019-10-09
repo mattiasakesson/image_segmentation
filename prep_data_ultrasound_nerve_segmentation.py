@@ -29,8 +29,8 @@ mask = np.array(np.array(mask, dtype=np.bool_), dtype=np.int16)
 print("im shape: ", im.shape)
 print("mask shape: ", mask.shape)
 
-pickle.dump(im, open('input_image.p', "wb"))
-pickle.dump(mask, open('mask.p', "wb"))
+pickle.dump(im, open('ultrasound_nerve_segmentation_data/input_image.p', "wb"))
+pickle.dump(mask, open('ultrasound_nerve_segmentation_data/mask.p', "wb"))
 
 # mask_ind = np.argsort(mask_names)
 # print("mask_ind: ", mask_ind)
