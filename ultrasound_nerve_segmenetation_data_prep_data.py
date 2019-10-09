@@ -18,10 +18,10 @@ for f in os.listdir(path):
         # print("f2: ", f2)
         if f2[-1] == 'mask.tif':
             mask_ = Image.open(os.path.join(path, f))
-            mask.append(mask_)
+            # mask.append(mask_)
             im_name = f2[0] + "_" + f2[1] + ".tif"
             im_ = Image.open(os.path.join(path, im_name))
-            im.append(im_)
+            # im.append(im_)
 
 
     i+=1
