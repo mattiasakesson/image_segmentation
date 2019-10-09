@@ -44,12 +44,12 @@ class Unet_model():
             history = self.model.fit(
                 inputs, targets, validation_data=(validation_inputs,
                                                   validation_targets), epochs=epochs, batch_size=batch_size, shuffle=True,
-                callbacks=[mcp_save, es], validation_freq=val_freq, verbose=verbose)
+                callbacks=[mcp_save, es], verbose=verbose)
         else:
             history = self.model.fit(
                 inputs, targets, epochs=epochs, batch_size=batch_size,
                 shuffle=True,
-                callbacks=[mcp_save, es], validation_freq=val_freq, verbose=verbose)
+                callbacks=[mcp_save, es], verbose=verbose)
 
 
         # To avoid overfitting load the model with best validation results after
